@@ -2,9 +2,9 @@ A generic purpose plugin loading system to be used in node projects. It uses npm
 and annotations in package.json to easily set up a project with plugin support. It is fully Promise-based.
 
 **This module is currently in alpha. The API can be changed in a release without
-warning. When version 1.0 is released semver versioning will be used.
+warning. When version 1.0 is released semver versioning will be used.**
 
-This module currently only supports loading plugins that are dependencies in the projects' package.json,
+**This module currently only supports loading plugins that are dependencies in the projects' package.json,
 but the goal is to be able to specify an external plugin repository, separate from the project.**
 
 # Usage
@@ -81,3 +81,11 @@ The following items are on the roadmap to be added:
 1. Allow for the package.json to be loaded from an external folder, not the project itself.
 2. Definition of implemented API version by the plugin, to be able to check if a plugin is outdated.
 3. Validator function in the configuration to check the exposed functions by the plugin
+
+# Contributing
+
+Contributions are always welcome. This is not necessarily code, it can also be updated documentations,
+tutorials, bug reports or pull requests.
+
+Please create an Issue to discuss a feature you want to implement, so that the details
+can be discussed in advance.

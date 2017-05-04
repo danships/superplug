@@ -4,9 +4,6 @@ and annotations in package.json to easily set up a project with plugin support. 
 **This module is currently in alpha. The API can be changed in a release without
 warning. When version 1.0 is released semver versioning will be used.**
 
-**This module currently only supports loading plugins that are dependencies in the projects' package.json,
-but the goal is to be able to specify an external plugin repository, separate from the project.**
-
 # Usage
 
 ## Setup
@@ -15,10 +12,20 @@ First add SuperPlug as a dependency to the node project you want to add plugin s
 
     npm install --save superplug
 
+Second determine the location from which you to load the dependencies from. **This must be
+an absolute path.** The path must be absolute because the _require()_ function in the
+SuperPlug module has a different relative path than the project it is included in.
+
+You can use a separate folder outside your project to hold your plugins. This allows for a different
+installed set of plugins per installation. Create a `package.json` file in the folder, and install
+the desired plugins via `npm install`. The you other option is to install the plugins into the project
+itself, then the location to use is `__dirname`, which is the absolute path to the script
+initializing SuperPlug. Update the path to have it point to the folder the `package.json` is in.
+
 In the code where the plugins are to be initialized, use the SuperPlug class:
 
     const SuperPlug = require('superplug')
-    let plugins = new SuperPlug({}) //see configuration section for more details on configuration
+    let plugins = new SuperPlug({location: \__dirname}) //see configuration section for more details on configuration
 
     plugins.getPlugins()
       .then(function (foundPlugins) {
@@ -26,7 +33,10 @@ In the code where the plugins are to be initialized, use the SuperPlug class:
         for (var iter in foundPlugins) {
 
           //in this example a plugin is expected to return an object that exposes a method called start
-          foundPlugins[iter].getPlugin.start()
+          foundPlugins[iter].getPlugin()
+            .then(function(pluginModule) {
+              pluginModule.start()
+            })
         }
       })
 
@@ -69,22 +79,22 @@ that the plugin should return. Object, functions, properties, etc.
 
 The SuperPlug constructor expects an options object argument.
 
-| Property | Description | Default Value |
-| -------- | ----------- | ------------- |
-| location | The path to look for the _package.json_ file | `./` |
-| packageProperty | The name of the property to search for in the _package.json_ file. | superplug |
+| Property | Required | Description | Default Value |
+| -------- |-------- |----------- | ------------- |
+| location | Yes | The path to look for the _package.json_ file. This must be an absolute path. | |
+| packageProperty | No | The name of the property to search for in the _package.json_ file. | superplug |
 
 # Roadmap
 
 The following items are on the roadmap to be added:
 
-1. Allow for the package.json to be loaded from an external folder, not the project itself.
-2. Definition of implemented API version by the plugin, to be able to check if a plugin is outdated.
-3. Validator function in the configuration to check the exposed functions by the plugin
+1. Definition of implemented API version by the plugin, to be able to check if a plugin is outdated.
+2. Validator function in the configuration to check if the implementation of the plugin is correct.
+3. Functions to install plugins, using `npm install`.
 
 # Contributing
 
-Contributions are always welcome. This is not necessarily code, it can also be updated documentations,
+Contributions are welcome. This does not necessarily have to be code, it can also be updated documentation,
 tutorials, bug reports or pull requests.
 
 Please create an Issue to discuss a feature you want to implement, so that the details

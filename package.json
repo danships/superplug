@@ -1,6 +1,6 @@
 {
   "name": "superplug",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A generic purpose plugin loading system to be used in node project. Leverages npm and package.json to easily set up a project with plugin support.",
   "main": "index.js",
   "scripts": {

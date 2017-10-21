@@ -1,7 +1,7 @@
 A generic purpose plugin loading system to be used in node projects. It uses npm modules
 and annotations in package.json to easily set up a project with plugin support. It is fully Promise-based.
 
-**This module is currently in alpha. The API can be changed in a release without
+**This module is currently in beta. The API can be changed in a release without
 warning. When version 1.0 is released semver versioning will be used.**
 
 # Usage

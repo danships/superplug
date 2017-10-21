@@ -11,8 +11,12 @@ class SuperPlug {
   }
 
   getPlugins () {
+    // Read the package.json for dependencies
     return packageReader(path.join(this.options.location, 'package.json'))
       .then((result) => {
+        if (!result.dependencies) {
+          return []
+        }
         return pluginResolver(Object.keys(result.dependencies), this.options)
       })
   }

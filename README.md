@@ -90,12 +90,12 @@ The following items are on the roadmap to be added:
 
 1. Definition of implemented API version by the plugin, to be able to check if a plugin is outdated.
 2. Validator function in the configuration to check if the implementation of the plugin is correct.
-3. Functions to install plugins, using `npm install`.
+3. Examples of functions to install plugins, using `npm install`.
 
 # Contributing
 
 Contributions are welcome. This does not necessarily have to be code, it can also be updated documentation,
 tutorials, bug reports or pull requests.
 
-Please create an Issue to discuss a feature you want to implement, so that the details
+Please create an Issue to propose a feature you want to implement, so that the details
 can be discussed in advance.

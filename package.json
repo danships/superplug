@@ -1,11 +1,11 @@
 {
   "name": "superplug",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "A generic purpose plugin loading system to be used in node project. Leverages npm and package.json to easily set up a project with plugin support.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "standard && mocha test/**/*.test.js",
-    "standard-fix": "standard --fix"
+    "build": "tsc",
+    "dev": "tsc-watch"
   },
   "repository": {
     "type": "git",
@@ -17,24 +17,18 @@
     "loading",
     "plugins"
   ],
-  "author": "matueranet",
+  "types": "dist/index.d.ts",
+  "author": "daangemist",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/matueranet/superplug/issues"
   },
   "homepage": "https://github.com/matueranet/superplug#readme",
   "devDependencies": {
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
-    "standard": "^9.0.2"
+    "@tsconfig/node14": "^1.0.0",
+    "@types/node": "^14.14.10",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.1.2"
   },
-  "dependencies": {
-    "bluebird": "^3.5.0",
-    "read-package-json": "^2.0.5"
-  },
-  "standard": {
-    "ignore": [
-      "test/**/*Test.js"
-    ]
-  }
+  "dependencies": {}
 }

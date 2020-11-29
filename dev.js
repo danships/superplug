@@ -1,9 +1,14 @@
-const SuperPlug = require('./index.js')
+const { SuperPlug } = require('./dist/index.js')
 
-let plug = new SuperPlug({packageProperty: 'version'})
+const main = async () => {
+  let plug = new SuperPlug({packageProperty: 'version', location: __dirname });
 
-plug.getPlugins()
-  .then(function (data) {
-    console.log(data[0].name)
-    data[0].getPlugin().then((plugin) => { console.log(plugin) })
-  })
+  const plugins = await plug.getPlugins();
+  if (plugins[0] === undefined) {
+    throw new Error('Its undefined!');
+  }
+  const plugin = await plugins[0].getPlugin();
+  console.log(plugin);
+};
+
+main();

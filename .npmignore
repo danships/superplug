@@ -1,3 +1,4 @@
-./src
+src
 dev.js
 tsconfig.json
+.editorconfig

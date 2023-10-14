@@ -43,6 +43,8 @@ has the following attributes/methods:
 2. `moduleName` - The name of the npm module.
 3. `rawProperty` - Get the object with the plugin metadata as defined in the plugins' `package.json`.
 4. `getPlugin()` - Returns a Promise which will resolve to the plugins module `main` file as defined in `package.json`.
+   If there is no `main` attribute defined in the `package.json`, this function will throw
+   a `NoPluginMainDefinedError` when invoked.
 
 ## Plugins
 
@@ -74,10 +76,11 @@ that the plugin should return: an object, functions, properties, etc.
 
 The SuperPlug constructor expects an options object argument.
 
-| Property        | Required | Description                                                                  | Default Value |
-| --------------- | -------- | ---------------------------------------------------------------------------- | ------------- |
-| location        | Yes      | The path to look for the _package.json_ file. This must be an absolute path. |               |
-| packageProperty | No       | The name of the property to search for in the _package.json_ file.           | superplug     |
+| Property           | Required | Description                                                                                                                                              | Default Value |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| location           | Yes      | The path to look for the _package.json_ file. This must be an absolute path.                                                                             |               |
+| packageProperty    | No       | The name of the property to search for in the _package.json_ file.                                                                                       | superplug     |
+| requirePackageMain | No       | Set to false to allow packages that do not have a "main" attribute in the _package.json_ defined to be returned as a plugin. The default value is `true` |
 
 # Roadmap
 

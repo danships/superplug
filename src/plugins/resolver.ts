@@ -2,7 +2,7 @@ import path from 'node:path';
 import Plugin from './plugin';
 import packageReader from '../package/reader';
 import type { Package } from '../package/types';
-import type { Options } from '../types';
+import type { InternalOptions } from '../types';
 
 function getModuleLocation(location: string, dependency: string, semver: string): string {
   if (semver.slice(0, 5) !== 'file:') {
@@ -13,7 +13,10 @@ function getModuleLocation(location: string, dependency: string, semver: string)
   return path.join(location, localPath);
 }
 
-export default async function resolver(dependencies: Record<string, string>, options: Options): Promise<Plugin[]> {
+export default async function resolver(
+  dependencies: Record<string, string>,
+  options: InternalOptions
+): Promise<Plugin[]> {
   const plugins: Plugin[] = [];
   const promises: Promise<void>[] = [];
 
@@ -27,12 +30,15 @@ export default async function resolver(dependencies: Record<string, string>, opt
     promises.push(
       packageReader(path.join(getModuleLocation(options.location, dependency, dependencyVersion), 'package.json')).then(
         (data: Package) => {
-          if (data['main'] && data[options.packageProperty]) {
+          if (
+            data[options.packageProperty] &&
+            ((options.requirePackageMain && data['main']) || !options.requirePackageMain)
+          ) {
             const pluginData = data[options.packageProperty];
             plugins.push(
               new Plugin(
                 pluginData?.name || dependency,
-                getModuleLocation(options.location, dependency, dependencyVersion),
+                data['main'] ? getModuleLocation(options.location, dependency, dependencyVersion) : undefined,
                 pluginData,
                 data
               )

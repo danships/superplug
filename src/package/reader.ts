@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { promisify } from 'util';
-import { Package } from './types';
+import fs from 'node:fs';
+import { promisify } from 'node:util';
+import type { Package } from './types';
 const readFile = promisify(fs.readFile);
 
 export default async function read(path: string): Promise<Package> {
@@ -8,4 +8,4 @@ export default async function read(path: string): Promise<Package> {
   return JSON.parse(contents.toLocaleString()) as Package;
 }
 
-module.exports = read
+module.exports = read;

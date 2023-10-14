@@ -1,12 +1,7 @@
 {
-    "extends": "@tsconfig/node14/tsconfig.json",
-    "compilerOptions": {
-        "outDir": "./dist",
-        "alwaysStrict": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "esModuleInterop": true,
-        "declaration": true
-    },
-    "exclude": ["./dev.js", "./dist"]
+  "extends": "@tsconfig/node18-strictest",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "exclude": ["./dev.js", "./dist"]
 }

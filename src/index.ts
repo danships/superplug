@@ -1,14 +1,10 @@
-import path from 'path';
-import { Options } from './types';
+import path from 'node:path';
 import packageReader from './package/reader';
+
 import pluginResolver from './plugins/resolver';
-import Plugin from './plugins/plugin';
+import type { Options } from './types';
 
 export { Package } from './package/types';
-export {
-  Options,
-  Plugin
-}
 
 export class SuperPlug {
   constructor(private options: Options) {
@@ -23,3 +19,6 @@ export class SuperPlug {
     return await pluginResolver(result.dependencies, this.options);
   }
 }
+
+export { Options } from './types';
+export { default as Plugin } from './plugins/plugin';

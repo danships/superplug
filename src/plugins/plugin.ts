@@ -1,14 +1,14 @@
-import { Package } from "../package/types"
+import type { Package } from '../package/types';
 
 class Plugin {
-  constructor (
+  constructor(
     public name: string,
     public location: string,
-    public rawProperty: any,
+    public rawProperty: unknown,
     public rawPackage: Package
   ) {}
 
-  async getPlugin() {
+  public async getPlugin() {
     return await import(this.location);
   }
 }

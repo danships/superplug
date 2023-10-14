@@ -23,16 +23,18 @@ initializing SuperPlug. Update the path to have it point to the folder the proje
 
 In the code where the plugins are to be initialized, use the SuperPlug class:
 
-    const { SuperPlug } = require('superplug')
-    const superPlug = new SuperPlug({location: __dirname}) // See configuration section for more details on configuration.
+```js
+  const { SuperPlug } = require('superplug')
+  const superPlug = new SuperPlug({location: __dirname}) // See configuration section for more details on configuration.
 
-    const foundPlugins = await superPlug.getPlugins();
-    //do something with the returned plugins
-    foundPlugins.forEach((plugin => {
-      // In this example a plugin is expected to return an object that exposes a method called start.
-      const pluginModule = await plugin.getPlugin();
-      pluginModule.start()
-    })
+  const foundPlugins = await superPlug.getPlugins();
+  //do something with the returned plugins
+  foundPlugins.forEach((plugin => {
+    // In this example a plugin is expected to return an object that exposes a method called start.
+    const pluginModule = await plugin.getPlugin();
+    pluginModule.start()
+  })
+```
 
 In the example above, foundPlugins is an array with Plugin classes. Each Plugin class
 has the following attributes/methods:
@@ -72,10 +74,10 @@ that the plugin should return: an object, functions, properties, etc.
 
 The SuperPlug constructor expects an options object argument.
 
-| Property | Required | Description | Default Value |
-| -------- |-------- |----------- | ------------- |
-| location | Yes | The path to look for the _package.json_ file. This must be an absolute path. | |
-| packageProperty | No | The name of the property to search for in the _package.json_ file. | superplug |
+| Property        | Required | Description                                                                  | Default Value |
+| --------------- | -------- | ---------------------------------------------------------------------------- | ------------- |
+| location        | Yes      | The path to look for the _package.json_ file. This must be an absolute path. |               |
+| packageProperty | No       | The name of the property to search for in the _package.json_ file.           | superplug     |
 
 # Roadmap
 

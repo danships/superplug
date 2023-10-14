@@ -1,0 +1,10 @@
+{
+  "name": "with-main",
+  "private": "true",
+  "dependencies": {
+    "package-no-plugin": "^1.0.0",
+    "package-plugin-superplug": "^1.2.3",
+    "package-plugin-superplug-no-main": "^3.2.1",
+    "package-plugin-testplugin": "^9.9.9"
+  }
+}

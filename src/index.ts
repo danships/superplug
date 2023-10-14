@@ -2,13 +2,19 @@ import path from 'node:path';
 import packageReader from './package/reader';
 
 import pluginResolver from './plugins/resolver';
-import type { Options } from './types';
+import type { InternalOptions, Options } from './types';
 
 export { Package } from './package/types';
 
 export class SuperPlug {
-  constructor(private options: Options) {
-    this.options.packageProperty = this.options.packageProperty || 'superPlug';
+  private options: InternalOptions;
+
+  constructor(options: Options) {
+    this.options = {
+      requirePackageMain: true,
+      packageProperty: 'superPlug',
+      ...options,
+    };
   }
 
   public async getPlugins() {
@@ -22,3 +28,4 @@ export class SuperPlug {
 
 export { Options } from './types';
 export { default as Plugin } from './plugins/plugin';
+export { NoPluginMainDefinedError } from './exception';

@@ -1,4 +1,8 @@
 src
-dev.js
 tsconfig.json
 .editorconfig
+tests
+tsconfig.eslint.json
+jest.config.js
+.github
+.eslintrc.json

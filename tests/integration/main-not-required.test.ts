@@ -22,6 +22,9 @@ describe('Test finding plugins that do not necessary have a main property.', () 
       throw new TypeError('pluginWithoutMain not found in list of plugins.');
     }
 
+    // Verify that the location is set, even though there was no main property configured.
+    expect(pluginWithoutMain.location).toContain('/tests/data/node_modules/package-plugin-superplug-no-main');
+
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     expect(() => pluginWithoutMain.getPlugin()).rejects.toThrowError();
   });

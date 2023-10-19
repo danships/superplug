@@ -40,11 +40,14 @@ In the example above, foundPlugins is an array with Plugin classes. Each Plugin 
 has the following attributes/methods:
 
 1. `name` - The name of the plugin, the `name` in the superplug package attribute, or the module name if that is not defined.
-2. `moduleName` - The name of the npm module.
+2. `location` - The path that points to the folder where the `package.json` of that plugin was read.
 3. `rawProperty` - Get the object with the plugin metadata as defined in the plugins' `package.json`.
 4. `getPlugin()` - Returns a Promise which will resolve to the plugins module `main` file as defined in `package.json`.
    If there is no `main` attribute defined in the `package.json`, this function will throw
    a `NoPluginMainDefinedError` when invoked.
+5. `mainAvailable` - is `true` when the `package.json` defines a `main` attribute. Can be `false` if
+   this is not the case, **and** `requirePackageMain` is set
+   to `false` in the configuration.
 
 ## Plugins
 

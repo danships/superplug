@@ -38,9 +38,10 @@ export default async function resolver(
             plugins.push(
               new Plugin(
                 pluginData?.name || dependency,
-                data['main'] ? getModuleLocation(options.location, dependency, dependencyVersion) : undefined,
+                getModuleLocation(options.location, dependency, dependencyVersion),
                 pluginData,
-                data
+                data,
+                !!data['main']
               )
             );
           }

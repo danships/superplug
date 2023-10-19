@@ -23,6 +23,7 @@ describe('Test finding plugins that have a main definition', () => {
 
     expect(plugin.name).toBe('Superplug plugin');
     expect(plugin.rawPackage.name).toBe('superplug-plugin');
+    expect(plugin.location).toContain('/tests/data/node_modules/package-plugin-superplug');
 
     const pluginFunction = await plugin.getPlugin();
     expect(pluginFunction.default()).toBe('plugin-superplug');
@@ -41,6 +42,7 @@ describe('Test finding plugins that have a main definition', () => {
     expect(plugins).toHaveLength(1); // only data/package-plugin-testplugin
     expect(plugin.name).toBe('Test plugin');
     expect(plugin.rawPackage?.name).toBe('test-plugin');
+    expect(plugin.location).toContain('/tests/data/node_modules/package-plugin-testplugin');
 
     const pluginFunction = await plugin.getPlugin();
     expect(pluginFunction.default()).toBe('plugin-test');

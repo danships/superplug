@@ -4,13 +4,14 @@ import type { Package } from '../package/types';
 class Plugin {
   constructor(
     public name: string,
-    public location: string | undefined,
+    public location: string,
     public rawProperty: unknown,
-    public rawPackage: Package
+    public rawPackage: Package,
+    public mainAvailable: boolean
   ) {}
 
   public async getPlugin() {
-    if (!this.location) {
+    if (!this.mainAvailable) {
       // This is a plugin without a 'main' attribute in the package.json.
       throw new NoPluginMainDefinedError(`No main defined for plugin ${this.name}.`);
     }
